@@ -1,12 +1,12 @@
-import React from "react";
-import Evento from "../components/Evento";
+// import React from "react";
+// import Evento from "../components/Evento";
 
-function CrearEvento() {
-  return (
-    <div>
-      <Evento />
-    </div>
-  );
-}
+// function CrearEvento() {
+//   return (
+//     <div>
+//       <Evento />
+//     </div>
+//   );
+// }
 
-export default CrearEvento;
+// export default CrearEvento;
