@@ -19,6 +19,14 @@ import ContactoPage from "./pages/ContactoPage"; // Nueva página de Contacto
 import NuestraInstitucionPage from "./pages/NuestraInstitucionPage"; // Nueva página
 import GobiernoEscolarPage from "./pages/GobiernoEscolarPage"; // Nueva página
 import EstatutosPage from "./pages/EstatutosPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
+import GestionInscripciones from "./pages/GestionInscripciones";
+import CrearEvento from "./pages/CrearEvento";
+import GestionUsuarios from "./pages/GestionUsuarios";
+import Configuracion from "./pages/Configuracion";
+import GestionCategorias from "./pages/GestionCategoria";
+
 function App() {
   // const [events, setEvents] = useState([]);
 
@@ -55,8 +63,54 @@ function App() {
       <div className="flex flex-col min-h-screen">
         {/* Navbar (no se muestra en la página de Login) */}
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          {/* Rutas protegidas para el dashboard */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          >
+            <Route
+              path="gestion-inscripciones"
+              element={<GestionInscripciones />}
+            />
+            <Route
+              path="crear-evento"
+              element={
+                <ProtectedRoute>
+                  <CrearEvento />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="gestion-categoria" element={<GestionCategorias />} />
+            <Route
+              path="gestion-usuarios"
+              element={
+                <ProtectedRoute allowedRoles={["soporte"]}>
+                  <GestionUsuarios />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="configuracion"
+              element={
+                <ProtectedRoute allowedRoles={["soporte"]}>
+                  <Configuracion />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
           <Route
             path="/inscripciones"
             element={

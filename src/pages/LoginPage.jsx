@@ -24,8 +24,10 @@ function LoginPage() {
       );
 
       if (response.data.message === "Inicio de sesión exitoso") {
-        // Redirigir al Dashboard y pasar el usuario como estado
-        navigate("/dashboard", { state: { user: response.data.user } });
+        // Guardar el usuario en localStorage
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        // Redirigir al Dashboard
+        navigate("/dashboard", { replace: true });
       }
     } catch (error) {
       // Manejar errores de la solicitud
